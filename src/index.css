@@ -5,6 +5,7 @@ body {
 		'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	background-color: rgba(0, 0, 0, 0.925);
 }
 
 code {
@@ -16,23 +17,17 @@ code {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-.dark-mode {
-	background-color: black;
-}
-
-.dark-mode h1 {
 	color: white;
 }
 
 .container {
-	max-width: 960px;
+	max-width: 1200px;
 	margin-right: auto;
 	margin-left: auto;
 	padding-right: 15px;
 	padding-left: 15px;
 	min-height: 100vh;
+	color: white;
 }
 
 .notes-list {
@@ -40,18 +35,20 @@ code {
 	grid-gap: 1rem;
 	grid-template-columns: repeat(
 		auto-fill,
-		minmax(250px, 1fr)
+		minmax(1fr, 1fr)
 	);
 }
 
 .note.new {
-	background-color: #67d7cc;
+	background-color: rgba(0, 0, 0, 0.815);
 }
 
 textarea {
 	border: none;
 	resize: none;
-	background-color: #67d7cc;
+	background-color: rgb(4 4 4);
+	color: white;
+	
 }
 
 textarea:focus {
@@ -71,7 +68,7 @@ textarea:focus {
 }
 
 .note {
-	background-color: #fef68a;
+	background-color: rgba(0, 0, 0, 0.815);
 	border-radius: 10px;
 	padding: 1rem;
 	min-height: 170px;
@@ -86,9 +83,14 @@ textarea:focus {
 	align-items: center;
 	justify-content: space-between;
 }
+.note-footer-main {
+	display: flex;
+	justify-content: start;
+}
 
 .delete-icon {
 	cursor: pointer;
+	padding-left:20px ;
 }
 
 .search {

@@ -8,29 +8,12 @@ const App = () => {
 	const [notes, setNotes] = useState([
 		{
 			id: nanoid(),
-			text: 'This is my first note!',
-			date: '15/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my second note!',
-			date: '21/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my third note!',
-			date: '28/04/2021',
-		},
-		{
-			id: nanoid(),
-			text: 'This is my new note!',
-			date: '30/04/2021',
-		},
+			text: 'Добавляйте новые заметки',
+			date: '25.04.2022',
+		}
 	]);
 
 	const [searchText, setSearchText] = useState('');
-
-	const [darkMode, setDarkMode] = useState(false);
 
 	useEffect(() => {
 		const savedNotes = JSON.parse(
@@ -49,7 +32,7 @@ const App = () => {
 		);
 	}, [notes]);
 
-	const addNote = (text) => {
+	const addNote = async (text) => {
 		const date = new Date();
 		const newNote = {
 			id: nanoid(),
@@ -57,18 +40,31 @@ const App = () => {
 			date: date.toLocaleDateString(),
 		};
 		const newNotes = [...notes, newNote];
-		setNotes(newNotes);
+		await setNotes(newNotes);
 	};
 
-	const deleteNote = (id) => {
+	const deleteNote = async (id) => {
+		const newNotes = notes.filter((note) => note.id !== id);
+		await setNotes(newNotes);
+	};
+	const saveNote = (id,text) => {
+		const date = new Date();
+		const newNote = {
+			id: nanoid(),
+			text: text+' (измененная заметка)',
+			date: date.toLocaleDateString(),
+		};
 		const newNotes = notes.filter((note) => note.id !== id);
 		setNotes(newNotes);
+		const newNotes2 = [...notes, newNote];
+		setNotes(newNotes2);
+		
+		
 	};
 
 	return (
-		<div className={`${darkMode && 'dark-mode'}`}>
 			<div className='container'>
-				<Header handleToggleDarkMode={setDarkMode} />
+				<Header />
 				<Search handleSearchNote={setSearchText} />
 				<NotesList
 					notes={notes.filter((note) =>
@@ -76,9 +72,9 @@ const App = () => {
 					)}
 					handleAddNote={addNote}
 					handleDeleteNote={deleteNote}
+					handleSaveNote={saveNote}
 				/>
 			</div>
-		</div>
 	);
 };
 
